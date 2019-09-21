@@ -11,10 +11,18 @@ func main() {
 	fmt.Println(deckSize)
 
 	// a slice of type string
-	cards := []string{"Ace of Spades", "Jack of Diamonds", "3 of Clubs"}
+	cards := deck{"Ace of Spades", "Jack of Diamonds", "3 of Clubs"}
 	fmt.Println("cards =", cards)
 	fmt.Printf("cards = %v\n", cards)
 	// LESSON 16
+
+	cards2 := append(cards, "Queen of Hearts")
+	fmt.Println("cards  =", cards)
+	fmt.Println("cards2 =", cards2)
+
+	cards.print()
+
+	fmt.Printf("\n====================================\n\n")
 
 	r := reversibleString("1234567890 The quick brown 狐 jumped over the lazy 犬")
 	fmt.Println("r           = ", r)
@@ -27,15 +35,4 @@ func newCard() string {
 
 func estPi() float64 {
 	return 3.14
-}
-
-//my attempt at a method
-type reversibleString string
-
-func (s reversibleString) Reverse() string {
-	runes := []rune(string(s))
-	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
-		runes[i], runes[j] = runes[j], runes[i]
-	}
-	return string(runes)
 }
