@@ -1,0 +1,110 @@
+### SHELL COLORS ###
+#
+# For explanations and further info see: http://linux-sxs.org/housekeeping/lscolors.html
+#
+export LS_COLORS='di=1;36:fi=0:ln=93:pi=5:so=5:bd=5:cd=5:or=31:mi=31:ex=35:*.rpm=90'
+#alias ls='ls -F --color --show-control-chars'
+
+### ALIASES ###
+
+# DIRECTORY LISTINGS
+alias ls='ls -F --color'
+alias ll='ls -l'
+alias l.='ls -d .*'
+alias lt='ls -altr'
+
+# SLAM folders
+alias slam1='cd /c/Risk/Workspace_182/sas.risk.stress.mid; git status'
+alias slam2='cd /c/Risk/Workspace_182/sas.risk.stress.mid.test; git status'
+alias slam3='cd ~/Dropbox/Ken_SAS_Docs/RFW_SLAM; git status'
+
+# GREP: ignore case and show line numbers
+alias grep='grep --ignore-case --line-number --color=always'
+
+# V64: SSH into my V64 machine
+alias v23='cat ~/grey.txt;ssh v64-d78614-01 -l kesize'
+alias v31='cat ~/purple.txt;ssh v64-d10b237-01 -l kesize'
+alias v32='cat ~/teal.txt;ssh v64-d10b237-02 -l kesize'
+alias v33='cat ~/brown.txt;ssh v64-d10b237-03 -l kesize'
+
+
+# Use LESS pager only if amount of info is more than one page
+export LESS="-RFX"
+
+# Find files
+alias f='find . -name'
+
+# Edit with Notepad++ editor
+npp() {
+	notepad++.exe $* &
+}
+
+# Edit with VSCode
+alias e='cmd //C code $*'
+
+# Python
+alias python='winpty python.exe'
+
+# Training 
+alias branchandmerge='cd /e/Git_Training/Jason_Taylor_Branch_and_Merge/starter-web'
+
+# GIT ALIASES: Suck in all git aliases and make them into bash aliases
+# I.e., for every "git abc" create a "gabc"
+
+for al in `__git_aliases`; do
+   alias g$al="git $al"
+done
+
+# Open a Windows Explorer at current working directory
+alias w='start .'
+
+# PATH (NOTE: we clobber default path and start from scratch)
+PATH="/bin"
+PATH="$PATH:/c/jdk1.8.0_131/bin"                                        # Java
+PATH="$PATH:/c/ProgramData/Oracle/Java/javapath"                        # Java
+PATH="$PATH:/c/go/bin"                                                  # Go
+PATH="$PATH:/c/Program Files (x86)/Notepad++"                           # Notepad++
+PATH="$PATH:/c/Users/kesize/AppData/Local/Programs/Microsoft VS Code"	# VS Code
+PATH="$PATH:/c/Program Files/Perforce"                                  # p4merge
+PATH="$PATH:/c/Program Files/Typora/bin"                                # Typora
+PATH="$PATH:/c/Python37"                                                # Python
+PATH="$PATH:/c/Python37/Scripts"                                        # Python Scrips (like git-review)
+PATH="$PATH:/c/Gradle/gradle-4.10/bin"                                  # Gradle
+PATH="$PATH:/c/Maven/apache-maven-3.5.4/bin"                            # Maven
+PATH="$PATH:."                         # current working dir (to avoid typing "./" all the time)
+PATH="$PATH:/cmd"
+PATH="$PATH:/mingw64/bin"
+PATH="$PATH:/usr/bin"
+PATH="$PATH:/usr/bin/core_perl"
+PATH="$PATH:/usr/bin/vendor_perl"
+PATH="$PATH:/c/Users/kesize/AppData/Local/Microsoft/WindowsApps"
+PATH="$PATH:/c/Users/kesize/AppData/Roaming/npm"
+PATH="$PATH:/c/WINDOWS"
+PATH="$PATH:/c/WINDOWS/system32"
+PATH="$PATH:/c/WINDOWS/System32/Wbem"
+PATH="$PATH:/c/WINDOWS/System32/WindowsPowerShell/v1.0"
+# Path -- SAS Tools
+PATH="$PATH://dntsrc/sastools/node_0.12.4/WX6"
+PATH="$PATH://ronco/public/dnt/tools"
+PATH="$PATH://ronco/public/dnt/tools/inetW7/bin"
+PATH="$PATH://ronco/public/V64/tools"
+PATH="$PATH:/c/Program Files (x86)/PRISM"
+PATH="$PATH:/c/Program Files/nodejs"
+PATH="$PATH:/c/Program Files/SASHome/SASFoundation/9.4/ets/sasexe"
+PATH="$PATH:/c/Program Files/SASHome/Secure/ccme4"
+PATH="$PATH:/c/Program Files/SASHome/x86/Secure/ccme4"
+export PATH
+
+### Old Aliases (for reference) follow ###
+
+# Jump to root of Data Management vAPP project tree
+# alias p='cd /c/Projects/DM/vAPP'
+#
+# Jump to modules dir
+#alias 23m='cd /c/Projects/DM/vAPP/2.3/content-dataloader/recipes/ci/sasinside-config-puppet-dataloader/modules'
+#alias 24m='cd /c/Projects/DM/vAPP/2.4/content-dataloader/recipes/ci/sasinside-config-puppet-dataloader/modules'
+# Jump to vdk dirs (from updating sas build)
+#alias 23v1='cd /c/Projects/DM/vAPP/2.3/automation-dataloader/roles/vdk/vars'
+#alias 24v1='cd /c/Projects/DM/vAPP/2.4/automation-dataloader/roles/vdk/vars'
+#alias 23v2='cd /c/Projects/DM/vAPP/2.3/automation-dataloader-objspwn/roles/vdk/vars'
+#alias 24v2='cd /c/Projects/DM/vAPP/2.4/automation-dataloader-objspwn/roles/vdk/vars'
