@@ -8,32 +8,40 @@ import (
 const deckSize = 52
 
 func main() {
-	// var card string = "Ace of Spades"
-	card := newCard()
-	fmt.Println(card)
-	fmt.Println(deckSize)
+	fmt.Println("\n====== illustrates type conversion (string <==> slice of byte) ======")
 
-	// a slice of type string
-	cards := deck{"Ace of Spades", "Jack of Diamonds", "3 of Clubs"}
-	fmt.Println("cards =", cards)
-	fmt.Printf("cards = %v\n", cards)
-	// LESSON 16
+	s1 := "Simple ASCII string"
+	fmt.Println("s1 =", s1)
+	b1 := []byte(s1)
+	fmt.Println("[]byte(s1) =", b1)
+	fmt.Println("and back:", string(b1))
+	s2 := "More complex ހ  	ސ  	ޤ  	ހި string with multibyte 𪜀 𪮘 𪾀 𫜴 characters Ꙃ ꙉ ꙮ Ꚗ"
+	fmt.Println("s2 =", s2)
+	b2 := []byte(s2)
+	fmt.Println("[]byte(s2) =", b2)
+	fmt.Println("and back:", string(b2))
 
-	cards2 := append(cards, "Queen of Hearts")
-	fmt.Println("cards  =", cards)
-	fmt.Println("cards2 =", cards2)
+	// create a deck of cards
+	cards := newDeck()
+	fmt.Println("cards.toString() =", cards.toString())
 
+	fmt.Println("\n====== illustrates append() behavior; the input args are not mutated ======")
+
+	cardsMutated := append(cards, "Queen of Hearts")
 	cards.print()
+	cardsMutated.print()
+
+	fmt.Println("\n====== deal(): FUNCTION vs METHOD ======")
+
+	hand, remainingCards := deal(cards, 5)
+	hand.print()
+	remainingCards.print()
 
 	fmt.Printf("\n====================================\n\n")
 
 	r := reversibleString("1234567890 The quick brown 狐 jumped over the lazy 犬")
 	fmt.Println("r           = ", r)
 	fmt.Println("r.Reverse() = ", r.Reverse())
-}
-
-func newCard() string {
-	return "Five of Diamonds"
 }
 
 func estPi() float64 {
