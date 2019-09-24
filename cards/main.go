@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math" // see: https://golang.org/pkg/math/
+)
 
 const deckSize = 52
 
@@ -35,4 +38,8 @@ func newCard() string {
 
 func estPi() float64 {
 	return 3.14
+}
+
+func hypotenuse(a, b float64) float64 {
+	return math.Sqrt(a*a + b*b)
 }
