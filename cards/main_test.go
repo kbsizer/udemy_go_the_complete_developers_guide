@@ -57,3 +57,25 @@ func Test_hypotenuse(t *testing.T) {
 		})
 	}
 }
+
+// TODO: Use this to write tests for SAVE and LOAD methods
+// https://www.toptal.com/go/your-introductory-course-to-testing-with-go
+
+/*
+maybe put this into a markdown doc or something?
+
+https://blog.golang.org/slices
+
+new() --- built-in function;
+
+make(slice,initialLength[],capacity]) -- built-in function; allocates a new array and creates a slice header to describe it,
+		  all at once. The make function takes three arguments: the type of the slice, its
+		  initial length, and its capacity, which is the length of the array that make allocates
+		  to hold the slice data. (if capacity is omitted, capacity=length)
+
+		  copy(targetSlice,sourceSlice) -- built-in function; copies data from sourceSlice to targetSlice;
+will only copy the minimum of the lengths of the two given slices; returns the number of elements copied
+
+append(slice, element) -- built-in function; returns the result of appending element to slice; allocates more memory if necessary
+append(slice1, slice2...) -- using the "variadic" or "ellipsis" operator (See: https://yourbasic.org/golang/three-dots-ellipsis/)
+*/

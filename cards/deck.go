@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"strings"
 )
 
@@ -63,9 +64,10 @@ func (d deck) saveToFile(filename string) error {
 	return ioutil.WriteFile(filename, deckAsByteSlice, 0666)
 }
 
-func loadDeckFromFile(filename string) (deck, error) {
-	deckAsByteSlice, err := ioutil.ReadFile(string)
+func newDeckFromFile(filename string) (deck, error) {
+	deckAsByteSlice, err := ioutil.ReadFile(filename)
 	if err != nil {
+		log.Println(err) // best practice for logging in Go??
 		return nil, err
 	}
 	s := string(deckAsByteSlice)

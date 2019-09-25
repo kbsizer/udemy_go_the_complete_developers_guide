@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math" // see: https://golang.org/pkg/math/
+	"reflect"
 )
 
 const deckSize = 52
@@ -21,12 +23,21 @@ func main() {
 	fmt.Println("[]byte(s2) =", b2)
 	fmt.Println("and back:", string(b2))
 
+	// ---------------------------- this whole block would make a good unit test ------
 	// create a deck of cards
 	cards := newDeck()
 	fmt.Println("cards.toString() =", cards.toString())
 	// save deck to disk
 	cards.saveToFile("myCards.dat")
+	// load it back from disk
+	cards2, err := newDeckFromFile("myCards.dat")
+	if err != nil {
+		log.Fatal("Failure while loading from file:", err)
+	}
+	// compare them
+	fmt.Println("Cards from disk same as cards saved to disk?", reflect.DeepEqual(cards, cards2))
 
+	// ----------------------------
 
 	fmt.Println("\n====== illustrates append() behavior; the input args are not mutated ======")
 
