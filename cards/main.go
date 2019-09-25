@@ -24,6 +24,9 @@ func main() {
 	// create a deck of cards
 	cards := newDeck()
 	fmt.Println("cards.toString() =", cards.toString())
+	// save deck to disk
+	cards.saveToFile("myCards.dat")
+
 
 	fmt.Println("\n====== illustrates append() behavior; the input args are not mutated ======")
 
