@@ -39,23 +39,27 @@ func main() {
 
 	// ----------------------------
 
+	fmt.Println("\n====== shuffle our deck ======")
+	cards.shuffle()
+	cards.print()
+
 	fmt.Println("\n====== illustrates append() behavior; the input args are not mutated ======")
 
-	cardsMutated := append(cards, "Queen of Hearts")
-	cards.print()
-	cardsMutated.print()
+	// cardsMutated := append(cards, "Queen of Hearts")
+	// cards.print()
+	// cardsMutated.print()
 
-	fmt.Println("\n====== deal(): FUNCTION vs METHOD ======")
+	// fmt.Println("\n====== deal(): FUNCTION vs METHOD ======")
 
-	hand, remainingCards := deal(cards, 5)
-	hand.print()
-	remainingCards.print()
+	// hand, remainingCards := deal(cards, 5)
+	// hand.print()
+	// remainingCards.print()
 
-	fmt.Printf("\n====================================\n\n")
+	// fmt.Printf("\n====================================\n\n")
 
-	r := reversibleString("1234567890 The quick brown 狐 jumped over the lazy 犬")
-	fmt.Println("r           = ", r)
-	fmt.Println("r.Reverse() = ", r.Reverse())
+	// r := reversibleString("1234567890 The quick brown 狐 jumped over the lazy 犬")
+	// fmt.Println("r           = ", r)
+	// fmt.Println("r.Reverse() = ", r.Reverse())
 }
 
 func estPi() float64 {

@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"strings"
+	"time"
 )
 
 // deck defineds a new type
@@ -57,13 +59,14 @@ func (d deck) toString() string {
 	return strings.Join([]string(d), delimiterChar)
 }
 
-// save converts this deck to a byte slice and writes it to a file with the given name.
+// saveToFile converts this deck to a byte slice and writes it to a file with the given name.
 func (d deck) saveToFile(filename string) error {
 	s := d.toString()
 	deckAsByteSlice := []byte(s)
 	return ioutil.WriteFile(filename, deckAsByteSlice, 0666)
 }
 
+// newDeckFromFile opens the given file and retrieves the deck persisted to it.  See: saveToFile()
 func newDeckFromFile(filename string) (deck, error) {
 	deckAsByteSlice, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -72,4 +75,20 @@ func newDeckFromFile(filename string) (deck, error) {
 	}
 	s := string(deckAsByteSlice)
 	return deck(strings.Split(s, delimiterChar)), err
+}
+
+// shuffles the cards in this deck
+func (d deck) shuffle() {
+	rand.Seed(time.Now().UnixNano())
+	// initial implementation
+	// maxNdxPlus1 := len(d)
+	// for i := range d {
+	// 	newPosition := rand.Intn(maxNdxPlus1)
+	// 	d[i], d[newPosition] = d[newPosition], d[i]
+	// }
+
+	// alternate implementation (using builtin Shuffle() function)
+	rand.Shuffle(len(d), func(i, j int) {
+		d[i], d[j] = d[j], d[i]
+	})
 }
