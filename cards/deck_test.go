@@ -3,13 +3,15 @@ package main
 import (
 	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert" // $ go get github.com/stretchr/testify
 )
 
 // Test_newDeck verifies that newDeck() returns a deck
 // 		1) with expected number of cards
 // 		2) with expected first card
 // 		3) with expected last card
-func Test_newDeck(t *testing.T) {
+func Test_newDeck_v1(t *testing.T) {
 	d := newDeck()
 	if len(d) != 52 {
 		t.Errorf("newDeck() returned %v cards, want %v cards", len(d), 52)
@@ -23,6 +25,30 @@ func Test_newDeck(t *testing.T) {
 		t.Errorf("newDeck()[0] = %v, want %v cards", lastCard, "King of Clubs")
 	}
 
+}
+
+// same as above, but using my homebrew "assert"
+func Test_newDeck_v2(t *testing.T) {
+	d := newDeck()
+	assertEquals(t, "length", len(d), 52)
+	assertEquals(t, "first card", d[0], "Ace of Spades")
+	assertEquals(t, "last card", d[51], "King of Clubs")
+}
+
+func assertEquals(t *testing.T, msg string, got, want interface{}) {
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("%s: got %v, wanted %v", msg, got, want)
+	}
+}
+
+// same as above, but using stretchr/testify's "assert"
+func Test_newDeck_v3(t *testing.T) {
+	d := newDeck()
+	assert.Equal(t, 52, len(d), "length")
+	assert.Equal(t, "Ace of Spades", d[0], "first card")
+	assert.Equal(t, "King of Clubs", d[51], "last card")
+
+	assert.
 }
 
 func Test_deal(t *testing.T) {
