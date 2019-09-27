@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"reflect"
 	"testing"
 
@@ -42,13 +43,45 @@ func assertEquals(t *testing.T, msg string, got, want interface{}) {
 }
 
 // same as above, but using stretchr/testify's "assert"
+// Testify Article: https://tutorialedge.net/golang/improving-your-tests-with-testify-go/
 func Test_newDeck_v3(t *testing.T) {
+	assert := assert.New(t)
 	d := newDeck()
-	assert.Equal(t, 52, len(d), "length")
-	assert.Equal(t, "Ace of Spades", d[0], "first card")
-	assert.Equal(t, "King of Clubs", d[51], "last card")
+	assert.Equal(52, len(d), "length")
+	assert.Equal("Ace of Spades", d[0], "first card")
+	assert.Equal("King of Clubs", d[51], "last card")
+}
 
-	assert.
+func Test_saveToFile_and_newDeckFromFile(t *testing.T) {
+	// setup
+	assert := assert.New(t)
+	filename := "Test_saveToFile_and_newDeckFromFile.dat"
+	// cleanup (not used here since we should be deleting the file as part of the test)
+	// defer os.Remove(filename)
+	// test for existence of file
+	if _, err := os.Stat(filename); os.IsExist(err) {
+		// something went wrong in an earlier run; attempt cleanup now
+		os.Remove(filename)
+	}
+	d := newDeck()
+	// method under test
+	d.saveToFile(filename)
+	// method under test
+	retrievedDeck, err := newDeckFromFile(filename)
+	// validations
+	assert.Nil(err)
+	assert.Equal(d, retrievedDeck, "retrieved deck does not match the deck we saved")
+
+	// delete file
+	os.Remove(filename)
+
+	// test behavior with non-existent file
+	retrievedDeck, err = newDeckFromFile(filename)
+	// validations
+	assert.NotNil(err)
+	assert.Nil(retrievedDeck)
+
+	// use of TestMain() -- https://stackoverflow.com/questions/28925688/golang-testing-method-after-each-test-undefined-testing-m/28925727#28925727
 }
 
 func Test_deal(t *testing.T) {
