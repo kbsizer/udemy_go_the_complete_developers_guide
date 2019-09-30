@@ -68,6 +68,7 @@ func Test_saveToFile_and_newDeckFromFile(t *testing.T) {
 	d.saveToFile(filename)
 	// method under test
 	retrievedDeck, err := newDeckFromFile(filename)
+	// _, d = d.deal(5) // mutate the deck         <--- uncomment to verify that test will fail when expected
 	// validations
 	assert.Nil(err)
 	assert.Equal(d, retrievedDeck, "retrieved deck does not match the deck we saved")
