@@ -1,3 +1,6 @@
+# ksizer@msn.com
+# KatieKat1983
+########################
 alias branchandmerge='cd /e/Git_Training/Jason_Taylor_Branch_and_Merge/starter-web'
 alias e='cmd //C code $*'
 alias f='find . -name'
