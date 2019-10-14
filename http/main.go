@@ -1,7 +1,7 @@
 package main
 
 import (
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 )
@@ -16,12 +16,21 @@ func main() {
 	if err != nil {
 		log.Fatal("At http.Get()", err)
 	}
-	// buff := make([]byte, 2<<14) // 2^14 = 16,384
-	// bytesRead, err := resp.Body.Read(buff)   ??????????
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatal("At resp.Body.ReadAll()", err)
+
+	// // version 1: using ReadAll
+	// body, err := ioutil.ReadAll(resp.Body)
+	// if err != nil {
+	// 	log.Fatal("At resp.Body.ReadAll()", err)
+	// }
+	// log.Println(string(body))
+
+	// Version 2: using Read with a byte slice buffer
+	buff := make([]byte, 2<<14) // 2^14 = 16,384
+	bytesRead, err := resp.Body.Read(buff)
+	log.Println("resp.Body.Read(buff) : err = ", err)
+	if err != nil && err != io.EOF {
+		log.Fatal("At Body.Read()", err)
 	}
-	// log.Println("Read", bytesRead, "bytes from", targetURL)
-	log.Println(string(body))
+
+	log.Println("Read", bytesRead, "bytes from", targetURL)
 }
